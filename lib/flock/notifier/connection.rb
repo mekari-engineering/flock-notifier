@@ -18,7 +18,9 @@ module Flock
       end
 
       def post(message)
-        payload       = { "text": message }
+        payload       = { "text" => message } if message.is_a? String
+        payload       = message if message.is_a? Hash
+
         @request.body = payload.to_json
 
         # Send the request
